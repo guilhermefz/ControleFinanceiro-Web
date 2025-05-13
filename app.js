@@ -1,6 +1,6 @@
 const db = new PouchDB('Finances');
 const form = document.getElementById('RecordForm');
-const list = document.getElementById('RecordList');
+const list = document.getElementById('RecordsList');
 const totalDaily = document.getElementById('DailySum');
 const total = document.getElementById('TotalSum');
 const today = new Date().toISOString().slice(0, 10);
@@ -33,7 +33,18 @@ async function refresh() {
         const li = document.createElement('li');
         li.textContent = `${date} - ${desc} : R$ ${value.toFixed(2)} - (${recordType})`;
         list.appendChild(li);
-    })
+
+        if (recordType === 'Income') {
+            totalG += value;
+            if (date === today) totalD += value;
+        }else {
+            totalG -= value;
+            if (date === today) totalD -= value;
+        }
+    });
+
+    totalDaily.textContent = `R$ ${totalD.toFixed(2)}`;
+    total.textContent = `R$ ${totalG.toFixed(2)}`;
    
 }
 
