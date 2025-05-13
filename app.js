@@ -8,7 +8,7 @@ const today = new Date().toISOString().slice(0, 10);
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const desc = document.getElementById('Description').value;
-    const value = parseFloatdocument.getElementById('Value').value;
+    const value = parseFloat(document.getElementById('Value').value);
     const recordType = document.getElementById('Type').value;
     const date = today;
 
