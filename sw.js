@@ -10,4 +10,10 @@ self.addEventListener("install", (e) => {
                 "https://cdn.jsdelivr.net/npm/pounchdb@7.2.2/dist/pounchdb.min.js"
             ])
         })) 
-})
+});
+
+self.addEventListener("fetch", (e) => {
+    e.respondWith(
+        caches.match(e.request).then((res) => res || fetch(e.Request))
+    );
+});
